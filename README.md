@@ -1,3 +1,3 @@
 # octasonic-python
 
-Python library for interacting with the [Octasonic HC-SR04 Breakout] (https://www.tindie.com/products/andygrove73/octasonic-8-x-hc-sr04-ultrasonic-breakout-board/)
+Python library for interacting with the [Octasonic HC-SR04 Breakout](https://www.tindie.com/products/andygrove73/octasonic-8-x-hc-sr04-ultrasonic-breakout-board/)
