@@ -18,7 +18,7 @@ class Octasonic:
   def __init__(self, channel):
     self.spi = spidev.SpiDev()
     self.spi.open(0, channel)
-    self.spi.mode = 0b01
+    self.spi.mode = 0b00
     self.spi.max_speed_hz = 1000
     # init and ignore response
     self.send(0x00, 0x00)
@@ -32,7 +32,7 @@ class Octasonic:
     # get the response
     response2= self.spi.xfer([CMD_NO_COMMAND])
     print "Responses: %s, %s" % (response1, response2)
-    return response2
+    return response2[0]
 
   def get_protocol_version(self):
     return self.send(CMD_GET_PROTOCOL_VERSION, 0x00)
