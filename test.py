@@ -19,7 +19,6 @@ class Octasonic:
     self.spi = spidev.SpiDev()
     self.spi.open(0, channel)
     self.spi.mode = 0b00
-    self.spi.max_speed_hz = 1000
     # init and ignore response
     self.send(0x00, 0x00)
 
@@ -28,9 +27,8 @@ class Octasonic:
   def send(self, cmd, param):
     # send the request
     response1 = self.spi.xfer([(cmd<<4)|param])
-    time.sleep(0.1) # give the AVR time to process the command
     # get the response
-    response2= self.spi.xfer([CMD_NO_COMMAND])
+    response2 = self.spi.xfer([CMD_NO_COMMAND])
     #print "Responses: %s, %s" % (response1, response2)
     return response2[0]
 
@@ -64,6 +62,7 @@ def main():
   print "Sensor count: %s" % octasonic.get_sensor_count()
   for x in range(0, 100):
     octasonic.toggle_led()
+    time.sleep(0.25)
     for i in range(0, 7):
       print octasonic.get_sensor_reading(i),
     print
