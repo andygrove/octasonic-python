@@ -19,6 +19,8 @@ class Octasonic:
     self.spi = spidev.SpiDev()
     self.spi.open(0, channel)
     self.spi.mode = 0b00
+    self.spi.max_speed_hz = 600 # need to see what speed is really supported
+    
     # init and ignore response
     self.send(0x00, 0x00)
 
