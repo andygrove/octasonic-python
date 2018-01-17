@@ -27,11 +27,11 @@ class Octasonic:
   # the command then another transfer to receive the results
   def send(self, cmd, param):
     # send the request
-    response1 = self.spi.xfer([cmd<<4|param])
+    response1 = self.spi.xfer([(cmd<<4)|param])
     time.sleep(0.1) # give the AVR time to process the command
     # get the response
     response2= self.spi.xfer([CMD_NO_COMMAND])
-    print "Responses: %s, %s" % (response1, response2)
+    #print "Responses: %s, %s" % (response1, response2)
     return response2[0]
 
   def get_protocol_version(self):
@@ -46,12 +46,27 @@ class Octasonic:
   def set_sensor_count(self, count):
     self.send(CMD_SET_SENSOR_COUNT, count)
 
+  def get_sensor_count(self):
+    self.send(CMD_GET_SENSOR_COUNT, 0x00)
+
+  def get_sensor_reading(self, index):
+    return self.send(CMD_GET_SENSOR_READING, index)
+
+  def toggle_led(self):
+    self.send(CMD_TOGGLE_LED, 0x00)
+
 def main():
   octasonic = Octasonic(0)
-  for x in range(0,10):
-    protocol_version = octasonic.get_protocol_version()
-    firmware_version = octasonic.get_firmware_version()
-    print "Protocol v%s; Firmware v%s" % (protocol_version, firmware_version)
+  protocol_version = octasonic.get_protocol_version()
+  firmware_version = octasonic.get_firmware_version()
+  print "Protocol v%s; Firmware v%s" % (protocol_version, firmware_version)
+  octasonic.set_sensor_count(8)
+  print "Sensor count: %s" % octasonic.get_sensor_count()
+  for x in range(0, 100):
+    octasonic.toggle_led()
+    for i in range(0, 7):
+      print octasonic.get_sensor_reading(i),
+    print
 
 if __name__ == "__main__":
   main()
