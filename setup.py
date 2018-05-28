@@ -7,7 +7,7 @@ setup(
     author = 'Andy Grove',
     author_email = 'andygrove73@gmail.com',
     url = 'https://github.com/andygrove/octasonic-python',
-    download_url = 'https://github.com/andygrove/octasonic-python/archive/1.0.tar.gz',
+    download_url = 'https://github.com/andygrove/octasonic-python/archive/1.0.1.tar.gz',
     keywords = ['octasonic', 'ultrasonic'],
     classifiers = [],
 )
