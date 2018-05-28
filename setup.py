@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = 'octasonic',
     packages = ['octasonic'],
-    version = '1.0',
+    version = '1.0.1',
     description = 'Python library for the Octasonic breakout board',
     author = 'Andy Grove',
     author_email = 'andygrove73@gmail.com',
