@@ -31,7 +31,7 @@ class Octasonic:
     response1 = self.spi.xfer([(cmd<<4)|param])
     # get the response
     response2 = self.spi.xfer([CMD_NO_COMMAND])
-    #print "Responses: %s, %s" % (response1, response2)
+    #print("Responses: %s, %s" % (response1, response2))
     return response2[0]
 
   def get_protocol_version(self):
@@ -47,7 +47,7 @@ class Octasonic:
     self.send(CMD_SET_SENSOR_COUNT, count)
 
   def get_sensor_count(self):
-    self.send(CMD_GET_SENSOR_COUNT, 0x00)
+    return self.send(CMD_GET_SENSOR_COUNT, 0x00)
 
   def get_sensor_reading(self, index):
     return self.send(CMD_GET_SENSOR_READING, index)
